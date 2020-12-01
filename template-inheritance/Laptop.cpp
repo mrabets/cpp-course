@@ -32,13 +32,13 @@ void Laptop::setMatrix(string matrix)
 
 istream& operator>>(istream& in, Laptop& obj)
 {
-	cout << "Enter model name: ";
+	cout << "Enter model name (ex. Samsung): ";
 	in >> obj.model;
 	
-	cout << "Enter battery value: ";
+	cout << "Enter battery value (ex. 1700): ";
 	in >> obj.battery; 
 	
-	cout << "Enter matrix name: ";
+	cout << "Enter matrix name (ex. TN-FILM): ";
 	in >> obj.matrix;
 
 	return in;

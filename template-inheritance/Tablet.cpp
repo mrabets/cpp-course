@@ -31,13 +31,13 @@ void Tablet::setStylus(bool stylus)
 
 istream& operator>>(istream& in, Tablet& obj)
 {
-	cout << "Enter model name: ";
+	cout << "Enter model name (ex. Samsung): ";
 	in >> obj.model;
 
-	cout << "Enter battery value: ";
+	cout << "Enter battery value (ex. 1700): ";
 	in >> obj.battery;
 
-	cout << "Has it stylus?: ";
+	cout << "Has it stylus? (0 - No, 1 - Yes): ";
 	in >> obj.stylus;
 
 	return in;
@@ -45,5 +45,6 @@ istream& operator>>(istream& in, Tablet& obj)
 
 ostream& operator<<(ostream& os, const Tablet& obj)
 {
+	cout << boolalpha;
 	return os << setw(10) << obj.model << setw(10) << obj.battery << setw(10) << obj.stylus << endl;
 }

@@ -9,6 +9,8 @@ public:
 	Ring();
 	~Ring();
 
+	int getSize();
+
 	void addToEmpty(T data);
 	void addToBegin(T data);
 	void addToEnd(T data);
@@ -17,14 +19,11 @@ public:
 	void deleteFirst();
 	void deleteLast();
 	void deleteByIndex(int index);
+	void clear();
 
 	void changeData(int index);
 
 	void display();
-
-	int getSize();
-
-	void clear();
 
 private:
 	template<class T>
@@ -43,6 +42,7 @@ private:
 	int size;
 	Node<T>* head;
 
+	void displayBase();
 };
 
 template<class T>
@@ -236,7 +236,7 @@ void Ring<T>::clear()
 }
 
 template<class T>
-void Ring<T>::display()
+void Ring<T>::displayBase()
 {
 	if (head == nullptr)
 	{
@@ -254,73 +254,31 @@ void Ring<T>::display()
 	cout << current->data;
 }
 
+template<class T>
+void Ring<T>::display()
+{
+	displayBase();
+}
+
 template<>
 void Ring<Laptop>::display()
 {
-	if (head == nullptr)
-	{
-		cout << "Ring is empty" << endl;
-		return;
-	}
-
 	cout << setw(10) << "MODEL" << setw(10) << "BATTERY" << setw(10) << "MATRIX" << endl;
-
-	Node<Laptop>* current = head;
-	while (current->next != head)
-	{
-		cout << current->data;
-		current = current->next;
-	}
-
-	cout << current->data;
+	displayBase();
 }
 
 template<>
 void Ring<Tablet>::display()
 {
-	if (head == nullptr)
-	{
-		cout << "Ring is empty" << endl;
-		return;
-	}
-
 	cout << setw(10) << "MODEL" << setw(10) << "BATTERY" << setw(10) << "STYLUS" << endl;
-
-	Node<Tablet>* current = head;
-	while (current->next != head)
-	{
-		cout << current->data;
-		current = current->next;
-	}
-
-	cout << current->data;
+	displayBase();
 }
 
 template<>
 void Ring<Monoblock>::display()
 {
-	if (head == nullptr)
-	{
-		cout << "Ring is empty" << endl;
-		return;
-	}
-
 	cout << setw(10) << "MODEL" << setw(10) << "POWER" << setw(10) << "COLOUR" << endl;
-
-	Node<Monoblock>* current = head;
-	while (current->next != head)
-	{
-		cout << current->data;
-		current = current->next;
-	}
-
-	cout << current->data;
-}
-
-template<class T>
-int Ring<T>::getSize()
-{
-	return size;
+	displayBase();
 }
 
 template <class T>
@@ -510,4 +468,10 @@ void Ring<Monoblock>::changeData(int index)
 			break;
 		}
 	}
+}
+
+template<class T>
+int Ring<T>::getSize()
+{
+	return size;
 }

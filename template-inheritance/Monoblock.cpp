@@ -32,13 +32,13 @@ void Monoblock::setStandColour(string standColour)
 
 istream& operator>>(istream& in, Monoblock& obj)
 {
-	cout << "Enter model name: ";
+	cout << "Enter model name (ex. Samsung): ";
 	in >> obj.model;
 
-	cout << "Enter power supply: ";
+	cout << "Enter power supply (ex. 5000): ";
 	in >> obj.powerSupply;
 
-	cout << "Enter the stand colour: ";
+	cout << "Enter the stand colour (ex. Green): ";
 	in >> obj.standColour;
 
 	return in;
