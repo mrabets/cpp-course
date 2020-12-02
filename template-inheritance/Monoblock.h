@@ -8,13 +8,16 @@ public:
 	Monoblock(const Monoblock& object);
 	~Monoblock();
 
-	string getStandColour();
+	string getStandColour() const;
+	static int getCount();
 	void setStandColour(string standColour);
 
 	friend istream& operator >> (istream& in, Monoblock& obj);
-	friend ostream& operator << (ostream& os, const Monoblock& obj);
+	friend ostream& operator << (ostream& os, Monoblock& obj);
 
-protected:
+private:
 	string standColour;
+	static int count;
 };
 
+int Monoblock::count = 0;

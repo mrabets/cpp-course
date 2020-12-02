@@ -7,9 +7,12 @@ public:
 	Stationary(const Stationary& object);
 	~Stationary();
 
-	int getPowerSupply();
+	int getPowerSupply() const;
 	void setPowerSupply(int powerSupply);
 
-protected:
+	friend istream& operator >> (istream& in, Stationary& obj);
+	friend ostream& operator << (ostream& os, Stationary& obj);
+
+private:
 	int powerSupply;
 };

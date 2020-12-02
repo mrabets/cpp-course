@@ -9,13 +9,16 @@ public:
 	Laptop(const Laptop& object);
 	~Laptop();
 
-	string getMatrix();
+	string getMatrix() const;
+	static int getCount();
 	void setMatrix(string matrix);
 
 	friend istream& operator >> (istream& in, Laptop& obj);
-	friend ostream& operator << (ostream& os, const Laptop& obj);
+	friend ostream& operator << (ostream& os, Laptop& obj);
 
 private:
 	string matrix;
+	static int count;
 };
 
+int Laptop::count = 0;

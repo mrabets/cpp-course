@@ -20,7 +20,7 @@ VMachine::~VMachine()
 
 }
 
-string VMachine::getModel()
+string VMachine::getModel() const
 {
 	return this->model;
 }
@@ -28,4 +28,15 @@ string VMachine::getModel()
 void VMachine::setModel(string model)
 {
 	this->model = model;
+}
+
+istream& operator>>(istream& in, VMachine& obj)
+{
+	cout << "Enter model name (ex. Samsung): ";
+	return in >> obj.model;
+}
+
+ostream& operator<<(ostream& os, VMachine& obj)
+{
+	return os << setw(10) << obj.model;
 }

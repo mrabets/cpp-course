@@ -19,9 +19,14 @@ Tablet::~Tablet()
 {
 }
 
-bool Tablet::isStylus()
+bool Tablet::isStylus() const
 {
 	return this->stylus;
+}
+
+int Tablet::getCount()
+{
+	return count;
 }
 
 void Tablet::setStylus(bool stylus)
@@ -31,11 +36,7 @@ void Tablet::setStylus(bool stylus)
 
 istream& operator>>(istream& in, Tablet& obj)
 {
-	cout << "Enter model name (ex. Samsung): ";
-	in >> obj.model;
-
-	cout << "Enter battery value (ex. 1700): ";
-	in >> obj.battery;
+	in >> dynamic_cast<Portative&>(obj);
 
 	cout << "Has it stylus? (0 - No, 1 - Yes): ";
 	in >> obj.stylus;
@@ -43,8 +44,8 @@ istream& operator>>(istream& in, Tablet& obj)
 	return in;
 }
 
-ostream& operator<<(ostream& os, const Tablet& obj)
+ostream& operator<<(ostream& os, Tablet& obj)
 {
 	cout << boolalpha;
-	return os << setw(10) << obj.model << setw(10) << obj.battery << setw(10) << obj.stylus << endl;
+	return os << dynamic_cast<Portative&>(obj) << obj.stylus << endl;
 }

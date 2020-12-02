@@ -19,7 +19,7 @@ Portative::~Portative()
 {
 }
 
-int Portative::getBattery()
+int Portative::getBattery() const
 {
     return this->battery;
 }
@@ -27,4 +27,19 @@ int Portative::getBattery()
 void Portative::setBattery(int battery)
 {
     this->battery = battery;
+}
+
+istream& operator>>(istream& in, Portative& obj)
+{
+    in >> dynamic_cast<VMachine&>(obj);
+
+    cout << "Enter battery value (ex. 1700): ";
+    in >> obj.battery;
+
+    return in;
+}
+
+ostream& operator<<(ostream& os, Portative& obj)
+{
+    return os << dynamic_cast<VMachine&>(obj) << setw(10) << obj.battery;
 }

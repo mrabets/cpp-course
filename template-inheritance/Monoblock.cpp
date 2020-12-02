@@ -20,9 +20,14 @@ Monoblock::~Monoblock()
 
 }
 
-string Monoblock::getStandColour()
+string Monoblock::getStandColour() const
 {
 	return this->standColour;
+}
+
+int Monoblock::getCount()
+{
+	return count;
 }
 
 void Monoblock::setStandColour(string standColour)
@@ -32,11 +37,7 @@ void Monoblock::setStandColour(string standColour)
 
 istream& operator>>(istream& in, Monoblock& obj)
 {
-	cout << "Enter model name (ex. Samsung): ";
-	in >> obj.model;
-
-	cout << "Enter power supply (ex. 5000): ";
-	in >> obj.powerSupply;
+	in >> dynamic_cast<Stationary&>(obj);
 
 	cout << "Enter the stand colour (ex. Green): ";
 	in >> obj.standColour;
@@ -44,7 +45,7 @@ istream& operator>>(istream& in, Monoblock& obj)
 	return in;
 }
 
-ostream& operator<<(ostream& os, const Monoblock& obj)
+ostream& operator<<(ostream& os, Monoblock& obj)
 {
-	return os << setw(10) << obj.model << setw(10) << obj.powerSupply << setw(10) << obj.standColour << endl;
+	return os << dynamic_cast<Stationary&>(obj) << setw(10) << obj.standColour << endl;
 }

@@ -12,10 +12,12 @@ public:
 	VMachine(const VMachine& object);
 	~VMachine();
 
-	string getModel();
+	string getModel() const;
 	void setModel(string model);
 
-protected:
+	friend istream& operator >> (istream& in, VMachine& obj);
+	friend ostream& operator << (ostream& os, VMachine& obj);
+
+private:
 	string model;
 };
-

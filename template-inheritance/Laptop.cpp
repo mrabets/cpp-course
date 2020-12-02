@@ -3,11 +3,13 @@
 Laptop::Laptop() : Portative()
 {
 	this->matrix = "ips";
+	count++;
 }
 
 Laptop::Laptop(string matrix, int battery, string model) : Portative(battery, model)
 {
 	this->matrix = matrix;
+	count++;
 }
 
 Laptop::Laptop(const Laptop& object) : Portative(object)
@@ -17,12 +19,17 @@ Laptop::Laptop(const Laptop& object) : Portative(object)
 
 Laptop::~Laptop()
 {
-
+	count--;
 }
 
-string Laptop::getMatrix()
+string Laptop::getMatrix() const
 {
 	return this->matrix;
+}
+
+int Laptop::getCount()
+{
+	return count;
 }
 
 void Laptop::setMatrix(string matrix)
@@ -31,20 +38,16 @@ void Laptop::setMatrix(string matrix)
 }
 
 istream& operator>>(istream& in, Laptop& obj)
-{
-	cout << "Enter model name (ex. Samsung): ";
-	in >> obj.model;
-	
-	cout << "Enter battery value (ex. 1700): ";
-	in >> obj.battery; 
-	
+{	
+	in >> dynamic_cast<Portative&>(obj);
+
 	cout << "Enter matrix name (ex. TN-FILM): ";
 	in >> obj.matrix;
 
 	return in;
 }
 
-ostream& operator<<(ostream& os, const Laptop& obj)
+ostream& operator<<(ostream& os, Laptop& obj)
 {
-	return os << setw(10) << obj.model << setw(10) << obj.battery << setw(10) << obj.matrix << endl;
+	return os << dynamic_cast<Portative&>(obj) << setw(10) << obj.matrix << endl;
 }

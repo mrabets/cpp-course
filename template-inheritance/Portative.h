@@ -8,10 +8,13 @@ public:
 	Portative(const Portative& object);
 	~Portative();
 
-	int getBattery();
+	int getBattery() const;
 	void setBattery(int battery);
 
-protected:
+	friend istream& operator >> (istream& in, Portative& obj);
+	friend ostream& operator << (ostream& os, Portative& obj);
+
+private:
 	int battery;
 };
 
