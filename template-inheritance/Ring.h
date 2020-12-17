@@ -5,6 +5,28 @@ using namespace std;
 template<class T>
 class Ring
 {
+private:
+	template<class T>
+	class Node
+	{
+	public:
+		Node* next;
+		T data;
+
+		Node(T data = T(), Node* next = nullptr)
+		{
+			this->data = data;
+			this->next = next;
+
+			countOfNodes++;
+		}
+	};
+	int size;
+	Node<T>* head;
+
+	static int countOfNodes;
+	void displayBase();
+
 public:
 	Ring();
 	~Ring();
@@ -22,28 +44,13 @@ public:
 	void clear();
 
 	void changeData(int index);
-
 	void display();
 
-private:
-	template<class T>
-	class Node
-	{
-	public:
-		Node* next;
-		T data;
-
-		Node(T data = T(), Node* next = nullptr)
-		{
-			this->data = data;
-			this->next = next;
-		}
-	};
-	int size;
-	Node<T>* head;
-
-	void displayBase();
+	static int getCountOfNodes();
 };
+
+template<class T>
+int Ring<T>::countOfNodes = 0;
 
 template<class T>
 Ring<T>::Ring()
@@ -258,6 +265,12 @@ template<class T>
 void Ring<T>::display()
 {
 	displayBase();
+}
+
+template<class T>
+int Ring<T>::getCountOfNodes()
+{
+	return countOfNodes;
 }
 
 template<>

@@ -25,11 +25,6 @@ string Monoblock::getStandColour() const
 	return this->standColour;
 }
 
-int Monoblock::getCount()
-{
-	return count;
-}
-
 void Monoblock::setStandColour(string standColour)
 {
 	this->standColour = standColour;

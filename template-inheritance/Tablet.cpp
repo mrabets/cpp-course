@@ -24,11 +24,6 @@ bool Tablet::isStylus() const
 	return this->stylus;
 }
 
-int Tablet::getCount()
-{
-	return count;
-}
-
 void Tablet::setStylus(bool stylus)
 {
 	this->stylus = stylus;

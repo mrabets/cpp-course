@@ -32,6 +32,7 @@ void Interface<T>::serviceMenu()
 			<< "7. Delete all" << endl << endl
 			<< "8. Change data" << endl << endl
 			<< "9. Display data" << endl << endl
+			<< "10. Out number of nodes" << endl << endl
 			<< "0. Exit" << endl;
 
 		int choiceMenu;
@@ -114,6 +115,10 @@ void Interface<T>::serviceMenu()
 
 		case 9:
 			object.display();
+			break;
+
+		case 10:
+			cout << "Count of nodes: " << object.getCountOfNodes() << endl;
 			break;
 
 		case 0:

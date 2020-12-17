@@ -3,13 +3,11 @@
 Laptop::Laptop() : Portative()
 {
 	this->matrix = "ips";
-	count++;
 }
 
 Laptop::Laptop(string matrix, int battery, string model) : Portative(battery, model)
 {
 	this->matrix = matrix;
-	count++;
 }
 
 Laptop::Laptop(const Laptop& object) : Portative(object)
@@ -19,17 +17,11 @@ Laptop::Laptop(const Laptop& object) : Portative(object)
 
 Laptop::~Laptop()
 {
-	count--;
 }
 
 string Laptop::getMatrix() const
 {
 	return this->matrix;
-}
-
-int Laptop::getCount()
-{
-	return count;
 }
 
 void Laptop::setMatrix(string matrix)

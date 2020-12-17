@@ -10,7 +10,6 @@ public:
 	~Laptop();
 
 	string getMatrix() const;
-	static int getCount();
 	void setMatrix(string matrix);
 
 	friend istream& operator >> (istream& in, Laptop& obj);
@@ -18,7 +17,5 @@ public:
 
 private:
 	string matrix;
-	static int count;
 };
 
-int Laptop::count = 0;

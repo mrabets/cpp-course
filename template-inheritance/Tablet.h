@@ -9,7 +9,6 @@ public:
 	~Tablet();
 
 	bool isStylus() const;
-	static int getCount();
 	void setStylus(bool stylus);
 
 	friend istream& operator >> (istream& in, Tablet& obj);
@@ -17,7 +16,4 @@ public:
 
 private:
 	bool stylus;
-	static int count;
 };
-
-int Tablet::count;

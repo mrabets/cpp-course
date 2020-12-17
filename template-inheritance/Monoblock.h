@@ -9,7 +9,6 @@ public:
 	~Monoblock();
 
 	string getStandColour() const;
-	static int getCount();
 	void setStandColour(string standColour);
 
 	friend istream& operator >> (istream& in, Monoblock& obj);
@@ -17,7 +16,4 @@ public:
 
 private:
 	string standColour;
-	static int count;
 };
-
-int Monoblock::count = 0;
