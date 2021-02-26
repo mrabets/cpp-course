@@ -32,11 +32,13 @@ void VMachine::setModel(string model)
 
 istream& operator>>(istream& in, VMachine& obj)
 {
-	cout << "Enter model name (ex. Samsung): ";
-	return in >> obj.model;
+	obj.model = GetCorrectString(in, "Enter model name (ex. Samsung): ");
+
+	return in;
 }
 
 ostream& operator<<(ostream& os, VMachine& obj)
 {
 	return os << setw(10) << obj.model;
 }
+

@@ -1,8 +1,7 @@
 #pragma once
-#include <iostream>
-#include <iomanip>
 
-using namespace std;
+#include "BaseException.h"
+#include <iomanip>
 
 class VMachine
 {

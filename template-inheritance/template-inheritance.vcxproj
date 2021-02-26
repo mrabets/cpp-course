@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BaseException.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Laptop.h" />
     <ClInclude Include="Monoblock.h" />
@@ -149,6 +151,7 @@
     <ClInclude Include="VMachine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseException.cpp" />
     <ClCompile Include="Laptop.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monoblock.cpp" />
@@ -159,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

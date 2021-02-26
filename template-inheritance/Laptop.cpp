@@ -32,10 +32,9 @@ void Laptop::setMatrix(string matrix)
 istream& operator>>(istream& in, Laptop& obj)
 {	
 	in >> dynamic_cast<Portative&>(obj);
-
-	cout << "Enter matrix name (ex. TN-FILM): ";
-	in >> obj.matrix;
-
+	
+	obj.matrix = GetCorrectString(in, "Enter matrix name (ex. IPS): ");
+	
 	return in;
 }
 

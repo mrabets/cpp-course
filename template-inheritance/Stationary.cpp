@@ -5,7 +5,7 @@ Stationary::Stationary()
 	this->powerSupply = 0;
 }
 
-Stationary::Stationary(int powerSupply, string model) : VMachine(model)
+Stationary::Stationary(double powerSupply, string model) : VMachine(model)
 {
 	this->powerSupply = powerSupply;
 }
@@ -19,12 +19,12 @@ Stationary::~Stationary()
 {
 }
 
-int Stationary::getPowerSupply() const
+double Stationary::getPowerSupply() const
 {
 	return this->powerSupply;
 }
 
-void Stationary::setPowerSupply(int powerSupply)
+void Stationary::setPowerSupply(double powerSupply)
 {
 	this->powerSupply = powerSupply;
 }
@@ -33,8 +33,7 @@ istream& operator>>(istream& in, Stationary& obj)
 {
 	in >> dynamic_cast<VMachine&>(obj);
 
-	cout << "Enter power supply (ex. 5000): ";
-	in >> obj.powerSupply;
+	obj.powerSupply = GetCorrectNumber<double>(in, "Enter power supply (ex. 5250.25): ");
 
 	return in;
 }

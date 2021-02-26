@@ -34,8 +34,7 @@ istream& operator>>(istream& in, Monoblock& obj)
 {
 	in >> dynamic_cast<Stationary&>(obj);
 
-	cout << "Enter the stand colour (ex. Green): ";
-	in >> obj.standColour;
+	obj.standColour = GetCorrectString(in, "Enter stand colour (ex. Green): ");
 
 	return in;
 }

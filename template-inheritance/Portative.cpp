@@ -33,8 +33,7 @@ istream& operator>>(istream& in, Portative& obj)
 {
     in >> dynamic_cast<VMachine&>(obj);
 
-    cout << "Enter battery value (ex. 1700): ";
-    in >> obj.battery;
+    obj.battery = GetCorrectNumber<int>(in, "Enter battery value (ex. 1700): ");
 
     return in;
 }
