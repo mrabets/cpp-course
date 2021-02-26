@@ -34,10 +34,10 @@ public:
 	int GetErrorCode() const { return errorCode; }
 };
 
-string GetCorrectString(istream& in, string whatInput);
+string GetCorrectString(istream& in, string whatInput, int maxLength);
 
 template<typename T>
-T GetCorrectNumber(istream& in, string whatInput)
+T GetCorrectNumber(istream& in, string whatInput, const T maxNumber)
 {
 	T number;
 	int flag;
@@ -60,7 +60,18 @@ T GetCorrectNumber(istream& in, string whatInput)
 			{
 				string message = "There is not ";
 				string typeName = typeid(number).name();
-				throw InputException(message + typeName, 2);
+				throw InputException(message + typeName, 1);
+			}
+
+			if (number < 2)
+			{
+				throw InputException("Value must be more than 1", 2);
+			}
+
+			if (number > maxNumber)
+			{
+				string message = "Value must be less than ";
+				throw InputException(message + to_string(maxNumber), 2);
 			}
 		}
 		catch (InputException obj)

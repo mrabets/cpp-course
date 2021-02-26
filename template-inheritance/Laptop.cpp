@@ -33,7 +33,7 @@ istream& operator>>(istream& in, Laptop& obj)
 {	
 	in >> dynamic_cast<Portative&>(obj);
 	
-	obj.matrix = GetCorrectString(in, "Enter matrix name (ex. IPS): ");
+	obj.matrix = GetCorrectString(in, "Enter matrix name (ex. IPS): ", 10);
 	
 	return in;
 }

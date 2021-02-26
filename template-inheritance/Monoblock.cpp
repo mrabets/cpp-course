@@ -34,7 +34,7 @@ istream& operator>>(istream& in, Monoblock& obj)
 {
 	in >> dynamic_cast<Stationary&>(obj);
 
-	obj.standColour = GetCorrectString(in, "Enter stand colour (ex. Green): ");
+	obj.standColour = GetCorrectString(in, "Enter stand colour (ex. Green): ", 15);
 
 	return in;
 }

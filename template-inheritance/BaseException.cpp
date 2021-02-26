@@ -1,6 +1,6 @@
 #include "BaseException.h"
 
-string GetCorrectString(istream& in, string whatInput)
+string GetCorrectString(istream& in, string whatInput, int maxLength)
 {
 	string str;
 
@@ -17,7 +17,7 @@ string GetCorrectString(istream& in, string whatInput)
 
 			system("CLS");
 
-			if (str.length() > 20)
+			if (str.length() > maxLength)
 			{
 				throw InputException("The length of the word is longer than 20", 1);
 			}
