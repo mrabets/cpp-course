@@ -33,7 +33,7 @@ istream& operator>>(istream& in, Stationary& obj)
 {
 	in >> dynamic_cast<VMachine&>(obj);
 
-	obj.powerSupply = GetCorrectNumber<double>(in, "Enter power supply in Watt (ex. 5250.25): ", 10000);
+	obj.powerSupply = GetCorrectNumber<float>(in, "Enter power supply in Watt (ex. 5250.25): ", 50.0f, 10000.0f);
 
 	return in;
 }

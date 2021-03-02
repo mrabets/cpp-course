@@ -33,7 +33,7 @@ istream& operator>>(istream& in, Portative& obj)
 {
     in >> dynamic_cast<VMachine&>(obj);
 
-    obj.battery = GetCorrectNumber<int>(in, "Enter battery mAh value (ex. 1700): ", 100000);
+    obj.battery = GetCorrectNumber<int>(in, "Enter battery mAh value (ex. 1700): ", 1500, 100000);
 
     return in;
 }
