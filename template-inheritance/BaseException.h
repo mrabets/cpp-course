@@ -1,10 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <typeinfo>
-
-using namespace std;
+#include "FileBase.h"
 
 class BaseException : public exception
 {

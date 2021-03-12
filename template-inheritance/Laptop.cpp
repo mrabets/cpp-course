@@ -42,3 +42,8 @@ ostream& operator<<(ostream& os, Laptop& obj)
 {
 	return os << dynamic_cast<Portative&>(obj) << setw(10) << obj.matrix << endl;
 }
+
+ifstream operator>>(ifstream& in, Laptop& obj)
+{
+	return ifstream();
+}

@@ -15,6 +15,8 @@ public:
 	friend istream& operator >> (istream& in, Laptop& obj);
 	friend ostream& operator << (ostream& os, Laptop& obj);
 
+	friend ifstream operator >> (ifstream& in, Laptop& obj);
+	friend ofstream operator << (ofstream& out, Laptop& obj);
 private:
 	string matrix;
 };

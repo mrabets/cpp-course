@@ -33,7 +33,6 @@ void VMachine::setModel(string model)
 istream& operator>>(istream& in, VMachine& obj)
 {
 	obj.model = GetCorrectString(in, "Enter model name (ex. Samsung): ", 20);
-
 	return in;
 }
 
@@ -41,4 +40,3 @@ ostream& operator<<(ostream& os, VMachine& obj)
 {
 	return os << setw(10) << obj.model;
 }
-
