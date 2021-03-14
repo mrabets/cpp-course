@@ -33,6 +33,7 @@ void Interface<T>::serviceMenu()
 			<< "8. Change data" << endl << endl
 			<< "9. Display data" << endl << endl
 			<< "10. Out number of nodes" << endl << endl
+			<< "11. Work with file system" << endl << endl
 			<< "0. Exit" << endl;
 
 		int choiceMenu;
@@ -121,6 +122,9 @@ void Interface<T>::serviceMenu()
 			cout << "Count of nodes: " << object.getCountOfNodes() << endl;
 			break;
 
+		case 11:
+			object.fileService();
+			break;
 		case 0:
 			return;
 		}

@@ -26,6 +26,7 @@ private:
 
 	static int countOfNodes;
 	void displayBase();
+	
 
 public:
 	Ring();
@@ -38,6 +39,8 @@ public:
 	void addToEnd(T data);
 	void addByIndex(T value, int index);
 
+	void fileService();
+
 	void deleteFirst();
 	void deleteLast();
 	void deleteByIndex(int index);
@@ -47,7 +50,172 @@ public:
 	void display();
 
 	static int getCountOfNodes();
+
+	void fileServiceBase(string fileName);
 };
+
+template<class T>
+void Ring<T>::fileServiceBase(string fileName)
+{
+	fstream fs;
+
+	while (true)
+	{
+		cout << "Choose operation for work with file system: " << endl << endl
+			<< "1. Write data" << endl
+			<< "2. Overwrite data" << endl
+			<< "3. Read data" << endl
+			<< "4. Print data to screen" << endl
+			<< "5. Delete data" << endl << endl
+			<< "0. Back" << endl;
+
+		int choice;
+		cin >> choice;
+
+		system("CLS");
+
+		string info;
+		switch (choice)
+		{
+		case 1:
+		{
+			FileTxt<T> fileObject(fileName, ios::out | ios::app);
+
+			if (!fileObject.isOpened())
+			{
+				cout << "Cannot open file" << endl << endl;
+			}
+			else
+			{
+				if (head == nullptr)
+				{
+					cout << "The table is empty" << endl;
+					break;
+				}
+
+				Node<T>* current = head;
+
+				while (current->next != head)
+				{
+					fileObject.WriteToFile(current->data);
+					//fs << current->data;
+					current = current->next;
+				}
+
+				fileObject.WriteToFile(current->data);
+
+				cout << "Succesfully writed" << endl << endl;
+			}
+
+			break;
+		}
+		case 2:
+		{
+			fs.open(fileName, fstream::out | fstream::trunc);
+
+			if (!fs.is_open())
+			{
+				cout << "Ошибка открытия файла" << endl;
+			}
+			else
+			{
+				if (head == nullptr)
+				{
+					cout << "Таблица пуста" << endl;
+					break;
+				}
+
+				Node<T>* current = head;
+				while (current->next != head)
+				{
+					fs << current->data;
+					current = current->next;
+				}
+
+				fs << current->data;
+
+				cout << "Данные успешно перезаписаны в базу данных" << endl << endl;
+			}
+
+			fs.close();
+			break;
+		}
+
+		case 3:
+		{
+			FileTxt<T> fileObject(fileName, ios::in);
+
+			if (!fileObject.isOpened())
+			{
+				cout << "Cannot read file" << endl;
+			}
+			else
+			{
+				while (true)
+				{
+					T object;
+					fileObject.ReadFromFile(object);
+
+					if (fileObject.isEnd())
+					{
+						break;
+					}
+
+					addToEnd(object);
+				}
+
+				cout << "Succesfully read" << endl << endl;
+			}
+
+			break;
+		}
+
+		case 4:
+		{
+			fs.open(fileName, fstream::in);
+
+			if (!fs.is_open())
+			{
+				cout << "Cannot open file" << endl;
+			}
+			else
+			{
+				while (true)
+				{
+					T object;
+					fs >> object;
+
+					if (fs.eof())
+					{
+						break;
+					}
+
+					cout << object;
+				}
+			}
+
+			fs.close();
+			break;
+		}
+
+		case 5:
+		{
+			fs.open(fileName, fstream::out | fstream::trunc);
+			fs.close();
+			break;
+		}
+
+		case 0:
+			return;
+		}
+	}
+}
+ 
+template<class T>
+void Ring<T>::fileService()
+{
+	fileServiceBase("NewFile.txt");
+}
 
 template<class T>
 int Ring<T>::countOfNodes = 0;

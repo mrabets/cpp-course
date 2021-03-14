@@ -10,10 +10,17 @@ using namespace std;
 
 class FileBase
 {
+public:
+	FileBase() { }
+	FileBase(string fileName, long int mode)
+	{ 
+		this->fileName = fileName;
+		this->mode = mode;
+	}
 protected:
 	string fileName;
-	ofstream out;
-	ifstream in;
+	fstream fs;
+	long int mode;
 };
 
 template <class T>
@@ -21,56 +28,62 @@ class FileTxt : public FileBase
 {
 public:
 	FileTxt() { }
-	FileTxt(string name);
+	FileTxt(string name, long int mode) : FileBase(name, mode)
+	{ 
+		OpenFile();
+	};
 
-	void Remove();
+	~FileTxt()
+	{
+		CloseFile();
+	}
 
 	void WriteToFile(T& object);
-
 	void ReadFromFile(T& object);
-};
+	void Remove();
+	void OpenFile();
+	bool isOpened();
+	void CloseFile();
 
-class BinFile : public FileBase
-{
+	bool isEnd();
 };
-
-template<class T>
-inline FileTxt<T>::FileTxt(string name)
-{
-	fileName = name;
-}
 
 template<class T>
 inline void FileTxt<T>::WriteToFile(T& object)
-{
-	out.open(fileName);
-
-	if (!out.is_open())
-	{
-		cout << "Невозможно открыть файл!" << endl;
-	}
-	else
-	{
-		out << object << endl;
-	}
-
-	out.close();
+{	
+	fs << object;
 }
 
 template<class T>
 inline void FileTxt<T>::ReadFromFile(T& object)
 {
-	in.open(fileName);
-
-	if (!in.is_open())
+	if (!isEnd())
 	{
-		cout << "Невозможно открыть файл!" << endl;
+		fs >> object;
 	}
-	else
-	{
-		in >> object << endl;
-	}
+}
 
-	out.close();
+template<class T>
+inline void FileTxt<T>::OpenFile()
+{
+	fs.open(fileName, ios::openmode(mode));
+}
+
+template<class T>
+inline bool FileTxt<T>::isOpened()
+{
+	return fs.is_open();
+}
+
+template<class T>
+inline bool FileTxt<T>::isEnd()
+{
+	return fs.eof();
+}
+
+template<class T>
+inline void FileTxt<T>::CloseFile()
+{
+	fs.close();
 }
 
