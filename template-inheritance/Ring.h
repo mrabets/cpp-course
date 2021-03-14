@@ -17,7 +17,6 @@ private:
 		{
 			this->data = data;
 			this->next = next;
-
 			countOfNodes++;
 		}
 	};
@@ -26,32 +25,26 @@ private:
 
 	static int countOfNodes;
 	void displayBase();
-	
+	void fileServiceBase(string fileName);
 
 public:
 	Ring();
 	~Ring();
 
 	int getSize();
-
 	void addToEmpty(T data);
 	void addToBegin(T data);
 	void addToEnd(T data);
 	void addByIndex(T value, int index);
-
-	void fileService();
-
 	void deleteFirst();
 	void deleteLast();
 	void deleteByIndex(int index);
 	void clear();
-
 	void changeData(int index);
 	void display();
-
 	static int getCountOfNodes();
 
-	void fileServiceBase(string fileName);
+	void fileService();
 };
 
 template<class T>
@@ -74,7 +67,6 @@ void Ring<T>::fileServiceBase(string fileName)
 
 		system("CLS");
 
-		string info;
 		switch (choice)
 		{
 		case 1:
@@ -83,7 +75,7 @@ void Ring<T>::fileServiceBase(string fileName)
 
 			if (!fileObject.isOpened())
 			{
-				cout << "Cannot open file" << endl << endl;
+				cout << "File open error" << endl << endl;
 			}
 			else
 			{
@@ -94,50 +86,47 @@ void Ring<T>::fileServiceBase(string fileName)
 				}
 
 				Node<T>* current = head;
-
 				while (current->next != head)
 				{
 					fileObject.WriteToFile(current->data);
-					//fs << current->data;
 					current = current->next;
 				}
 
 				fileObject.WriteToFile(current->data);
 
-				cout << "Succesfully writed" << endl << endl;
+				cout << "Writed succeed" << endl << endl;
 			}
 
 			break;
 		}
 		case 2:
 		{
-			fs.open(fileName, fstream::out | fstream::trunc);
+			FileTxt<T> fileObject(fileName, ios::out | ios::trunc);
 
-			if (!fs.is_open())
+			if (!fileObject.isOpened())
 			{
-				cout << "Ошибка открытия файла" << endl;
+				cout << "File open error" << endl << endl;
 			}
 			else
 			{
 				if (head == nullptr)
 				{
-					cout << "Таблица пуста" << endl;
+					cout << "The table is empty" << endl;
 					break;
 				}
 
 				Node<T>* current = head;
 				while (current->next != head)
 				{
-					fs << current->data;
+					fileObject.WriteToFile(current->data);
 					current = current->next;
 				}
 
-				fs << current->data;
+				fileObject.WriteToFile(current->data);
 
-				cout << "Данные успешно перезаписаны в базу данных" << endl << endl;
+				cout << "Overwrited succeed" << endl << endl;
 			}
 
-			fs.close();
 			break;
 		}
 
@@ -147,7 +136,7 @@ void Ring<T>::fileServiceBase(string fileName)
 
 			if (!fileObject.isOpened())
 			{
-				cout << "Cannot read file" << endl;
+				cout << "File open error" << endl;
 			}
 			else
 			{
@@ -164,7 +153,7 @@ void Ring<T>::fileServiceBase(string fileName)
 					addToEnd(object);
 				}
 
-				cout << "Succesfully read" << endl << endl;
+				cout << "Read succeed" << endl << endl;
 			}
 
 			break;
@@ -172,20 +161,20 @@ void Ring<T>::fileServiceBase(string fileName)
 
 		case 4:
 		{
-			fs.open(fileName, fstream::in);
+			FileTxt<T> fileObject(fileName, ios::in);
 
-			if (!fs.is_open())
+			if (!fileObject.isOpened())
 			{
-				cout << "Cannot open file" << endl;
+				cout << "File open error" << endl;
 			}
 			else
 			{
 				while (true)
 				{
 					T object;
-					fs >> object;
+					fileObject.ReadFromFile(object);
 
-					if (fs.eof())
+					if (fileObject.isEnd())
 					{
 						break;
 					}
@@ -194,27 +183,37 @@ void Ring<T>::fileServiceBase(string fileName)
 				}
 			}
 
-			fs.close();
 			break;
 		}
 
 		case 5:
 		{
-			fs.open(fileName, fstream::out | fstream::trunc);
-			fs.close();
+			FileTxt<T> fileObject(fileName, ios::out | ios::trunc);
 			break;
 		}
 
-		case 0:
+		default:
 			return;
 		}
 	}
 }
  
-template<class T>
-void Ring<T>::fileService()
+template<>
+void Ring<Laptop>::fileService()
+{	
+	fileServiceBase("Laptop.txt");
+}
+
+template<>
+void Ring<Tablet>::fileService()
 {
-	fileServiceBase("NewFile.txt");
+	fileServiceBase("Tablet.txt");
+}
+
+template<>
+void Ring<Monoblock>::fileService()
+{
+	fileServiceBase("Monoblock.txt");
 }
 
 template<class T>
@@ -250,7 +249,6 @@ void Ring<T>::addToEnd(T data)
 		}
 
 		current->next = new Node<T>(data, head);
-
 		size++;
 	}
 }
@@ -260,7 +258,6 @@ void Ring<T>::addToEmpty(T data)
 {
 	head = new Node<T>(data);
 	head->next = head;
-
 	size++;
 }
 
@@ -274,7 +271,6 @@ void Ring<T>::addToBegin(T data)
 	else
 	{
 		Node<T>* current = head;
-
 		while (current->next != head)
 		{
 			current = current->next;
@@ -282,7 +278,6 @@ void Ring<T>::addToBegin(T data)
 
 		head = new Node<T>(data, head);
 		current->next = head;
-
 		size++;
 	}
 }
@@ -292,14 +287,12 @@ void Ring<T>::addByIndex(T value, int index)
 {
 	if (index == 0)
 	{
-		addToBegin(value);
-		return;
+		addToBegin(value); return;	
 	}
 
 	if (index == size - 1)
 	{
-		addToEnd(value);
-		return;
+		addToEnd(value); return;	
 	}
 
 	Node<T>* previous = head;
@@ -311,7 +304,6 @@ void Ring<T>::addByIndex(T value, int index)
 
 	Node<T>* newNode = new Node<T>(value, previous->next);
 	previous->next = newNode;
-
 	size++;
 }
 
@@ -320,14 +312,12 @@ void Ring<T>::deleteByIndex(int index)
 {
 	if (head == nullptr)
 	{
-		cout << "Ring is empty" << endl;
-		return;
+		cout << "Ring is empty" << endl; return;	
 	}
 
 	if (index == 0)
 	{
-		deleteFirst();
-		return;
+		deleteFirst(); return;	
 	}
 
 	Node<T>* previous = head;
@@ -345,7 +335,6 @@ void Ring<T>::deleteByIndex(int index)
 		}
 
 		Node<T>* temp = previous->next;
-
 		previous->next = temp->next;
 		delete temp;
 	}
@@ -358,8 +347,7 @@ void Ring<T>::deleteFirst()
 {
 	if (head == nullptr)
 	{
-		cout << "Ring is empty" << endl;
-		return;
+		cout << "Ring is empty" << endl; return;		
 	}
 
 	Node<T>* current = head;
@@ -377,10 +365,8 @@ void Ring<T>::deleteFirst()
 		}
 
 		Node<T>* temp = head;
-
 		head = head->next;
 		current->next = head;
-
 		delete temp;
 	}
 
@@ -398,8 +384,7 @@ void Ring<T>::clear()
 {
 	if (head == nullptr)
 	{
-		cout << "Ring is empty" << endl;
-		return;
+		cout << "Ring is empty" << endl; return;	
 	}
 
 	while (size)
@@ -415,8 +400,7 @@ void Ring<T>::displayBase()
 {
 	if (head == nullptr)
 	{
-		cout << "Ring is empty" << endl;
-		return;
+		cout << "Ring is empty" << endl; return;	
 	}
 
 	Node<T>* current = head;

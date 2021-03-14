@@ -32,9 +32,7 @@ void Laptop::setMatrix(string matrix)
 istream& operator>>(istream& in, Laptop& obj)
 {	
 	in >> dynamic_cast<Portative&>(obj);
-	
 	obj.matrix = GetCorrectString(in, "Enter matrix name (ex. IPS): ", 10);
-	
 	return in;
 }
 
@@ -43,7 +41,14 @@ ostream& operator<<(ostream& os, Laptop& obj)
 	return os << dynamic_cast<Portative&>(obj) << setw(10) << obj.matrix << endl;
 }
 
-ifstream operator>>(ifstream& in, Laptop& obj)
+fstream& operator<<(fstream& out, Laptop& obj)
 {
-	return ifstream();
+	out << setw(15) << obj.model << setw(15) << obj.battery << setw(10) << obj.matrix << '\n';
+	return out;
+}
+
+fstream& operator>>(fstream& in, Laptop& obj)
+{
+	in >> obj.model >> obj.battery >> obj.matrix;
+	return in;
 }

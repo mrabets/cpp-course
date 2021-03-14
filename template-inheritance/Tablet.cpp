@@ -44,3 +44,15 @@ ostream& operator<<(ostream& os, Tablet& obj)
 	cout << boolalpha;
 	return os << dynamic_cast<Portative&>(obj) << obj.stylus << endl;
 }
+
+fstream& operator<<(fstream& out, Tablet& obj)
+{
+	out << setw(15) << obj.model << setw(15) << obj.battery << setw(10) << obj.stylus << '\n';
+	return out;
+}
+
+fstream& operator>>(fstream& in, Tablet& obj)
+{
+	in >> obj.model >> obj.battery >> obj.stylus;
+	return in;
+}

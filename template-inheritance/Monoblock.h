@@ -14,6 +14,8 @@ public:
 	friend istream& operator >> (istream& in, Monoblock& obj);
 	friend ostream& operator << (ostream& os, Monoblock& obj);
 
+	friend fstream& operator<<(fstream& out, Monoblock& obj);
+	friend fstream& operator>>(fstream& in, Monoblock& obj);
 private:
 	string standColour;
 };

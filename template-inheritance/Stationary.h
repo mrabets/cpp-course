@@ -13,6 +13,6 @@ public:
 	friend istream& operator >> (istream& in, Stationary& obj);
 	friend ostream& operator << (ostream& os, Stationary& obj);
 
-private:
+protected:
 	double powerSupply;
 };

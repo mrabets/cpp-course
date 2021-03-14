@@ -40,3 +40,4 @@ ostream& operator<<(ostream& os, VMachine& obj)
 {
 	return os << setw(10) << obj.model;
 }
+
