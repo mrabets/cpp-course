@@ -29,16 +29,14 @@ void Interface<T>::serviceMenu()
 			<< "4. Delete first" << endl
 			<< "5. Delete last" << endl
 			<< "6. Delete by index" << endl
-			<< "7. Delete all" << endl << endl
-			<< "8. Change data" << endl << endl
-			<< "9. Display data" << endl << endl
+			<< "7. Delete all" << endl
+			<< "8. Change data" << endl
+			<< "9. Display data" << endl
 			<< "10. Out number of nodes" << endl << endl
 			<< "11. Work with file system" << endl << endl
 			<< "0. Exit" << endl;
-
-		int choiceMenu;
-		cin >> choiceMenu;
-
+		
+		int choiceMenu = GetCorrectNumber(cin, "", 0, 11);
 		system("CLS");
 		
 		T value;
@@ -49,13 +47,11 @@ void Interface<T>::serviceMenu()
 		case 1:
 			cin >> value;
 			object.addToBegin(value);
-
 			break;
 
 		case 2:
 			cin >> value;
 			object.addToEnd(value);
-
 			break;
 
 		case 3:
@@ -93,7 +89,6 @@ void Interface<T>::serviceMenu()
 			}
 
 			object.deleteByIndex(index);
-
 			break;
 
 		case 7:
@@ -111,7 +106,6 @@ void Interface<T>::serviceMenu()
 			}
 
 			object.changeData(index);
-
 			break;
 
 		case 9:
@@ -125,10 +119,9 @@ void Interface<T>::serviceMenu()
 		case 11:
 			object.fileService();
 			break;
-		case 0:
+		default:
 			return;
 		}
-
 		cout << endl;
 	}
 }

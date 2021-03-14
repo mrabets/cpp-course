@@ -42,7 +42,7 @@ istream& operator>>(istream& in, Tablet& obj)
 ostream& operator<<(ostream& os, Tablet& obj)
 {
 	cout << boolalpha;
-	return os << dynamic_cast<Portative&>(obj) << obj.stylus << endl;
+	return os << dynamic_cast<Portative&>(obj) << setw(10) << obj.stylus << endl;
 }
 
 fstream& operator<<(fstream& out, Tablet& obj)
