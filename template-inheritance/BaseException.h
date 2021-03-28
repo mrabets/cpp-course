@@ -33,11 +33,18 @@ public:
 string GetCorrectString(istream& in, string whatInput, int maxLength);
 
 template<class T>
-string GetFileName()
+string GetFileName(bool isBinaryFile = false)
 {
 	string fileName = typeid(T).name();
 	fileName.erase(0, 6);
-	fileName.append(".txt");
+	if (isBinaryFile)
+	{
+		fileName.append(".bin");
+	}
+	else
+	{
+		fileName.append(".txt");
+	}
 
 	return fileName;
 }

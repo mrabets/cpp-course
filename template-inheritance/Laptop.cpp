@@ -48,6 +48,11 @@ fstream& operator<<(fstream& out, Laptop& obj)
 	return out;
 }
 
+//fstream& operator<< (fstream& out, const Laptop& obj) {
+//	out.write(reinterpret_cast<const char*>(&obj), sizeof(obj)); // И никто больше не ругается.
+//	return out;
+//}
+
 fstream& operator>>(fstream& in, Laptop& obj)
 {
 	in >> dynamic_cast<Portative&>(obj);

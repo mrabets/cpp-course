@@ -38,9 +38,11 @@ void Interface<T>::serviceMenu()
 			<< "10. Out number of nodes" << endl << endl
 			<< "11. Write to TXT file" << endl
 			<< "12. Read from TXT file" << endl << endl
+			<< "13. Write to BIN file" << endl
+			<< "14. Read from BIN file" << endl << endl
 			<< "0. Exit" << endl;
 		
-		int choiceMenu = GetCorrectNumber(cin, "", 0, 12);
+		int choiceMenu = GetCorrectNumber(cin, "", 0, 14);
 		system("CLS");
 		
 		T value;
@@ -128,6 +130,7 @@ void Interface<T>::serviceMenu()
 			if (!fl_txt.isOpened())
 			{
 				cout << "File open failed";
+				break;
 			}
 
 			while (object.empty())
@@ -149,6 +152,7 @@ void Interface<T>::serviceMenu()
 			if (!fl_txt.isOpened())
 			{
 				cout << "File open failed";
+				break;
 			}
 
 			while (true)
@@ -163,6 +167,64 @@ void Interface<T>::serviceMenu()
 
 				object.addToEnd(temp);
 			}
+
+			cout << "Read succeed" << endl;
+		}
+
+		break;
+
+		case 13:
+		{
+			FileBin<T> fl_bin(GetFileName<T>(true));
+			fl_bin.OpenBinFileOut();
+
+			if (!fl_bin.isOpened())
+			{
+				cout << "File open failed";
+				break;
+			}
+
+			T obj = object.popBegin();
+			fl_bin.WriteToBinFile(obj);
+
+			/*while (object.empty())
+			{
+				T obj = object.popBegin();
+				fl_bin.WriteToBinFile(obj);
+			}*/
+
+			cout << "Write succeed" << endl;
+		}
+
+		break;
+
+		case 14:
+		{
+			FileBin<T> fl_bin(GetFileName<T>(true));
+			fl_bin.OpenBinFileIn();
+
+			if (!fl_bin.isOpened())
+			{
+				cout << "File open failed";
+				break;
+			}
+
+			T temp;
+			fl_bin.ReadFromBinFile(temp);
+			object.addToEnd(temp);
+
+			/*while (true)
+			{
+				T temp;
+				fl_bin.ReadFromBinFile(temp);
+
+				if (fl_bin.isEnd())
+				{
+					break;
+				}
+
+				object.addToEnd(temp);
+			}*/
 
 			cout << "Read succeed" << endl;
 		}
