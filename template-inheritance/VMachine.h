@@ -15,6 +15,9 @@ public:
 
 	friend istream& operator >> (istream& in, VMachine& obj);
 	friend ostream& operator << (ostream& os, VMachine& obj);
-protected:
+
+	friend fstream& operator<<(fstream& out, VMachine& obj);
+	friend fstream& operator>>(fstream& in, VMachine& obj);
+private:
 	string model;
 };

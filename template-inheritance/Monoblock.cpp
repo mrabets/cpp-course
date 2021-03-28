@@ -46,12 +46,14 @@ ostream& operator<<(ostream& os, Monoblock& obj)
 
 fstream& operator<<(fstream& out, Monoblock& obj)
 {
-	out << setw(15) << obj.model << setw(15) << obj.powerSupply << setw(10) << obj.standColour << '\n';
+	out << dynamic_cast<Stationary&>(obj);
+	out << obj.standColour << '\n';
 	return out;
 }
 
 fstream& operator>>(fstream& in, Monoblock& obj)
 {
-	in >> obj.model >> obj.powerSupply >> obj.standColour;
+	in >> dynamic_cast<Stationary&>(obj);
+	getline(in, obj.standColour, '\n');
 	return in;
 }

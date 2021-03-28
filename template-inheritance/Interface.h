@@ -6,6 +6,8 @@
 
 #include "Ring.h"
 
+
+
 template<class T>
 class Interface
 {
@@ -34,10 +36,11 @@ void Interface<T>::serviceMenu()
 			<< "8. Change data" << endl
 			<< "9. Display data" << endl
 			<< "10. Out number of nodes" << endl << endl
-			<< "11. Work with file system" << endl << endl
+			<< "11. Write to TXT file" << endl
+			<< "12. Read from TXT file" << endl << endl
 			<< "0. Exit" << endl;
 		
-		int choiceMenu = GetCorrectNumber(cin, "", 0, 11);
+		int choiceMenu = GetCorrectNumber(cin, "", 0, 12);
 		system("CLS");
 		
 		T value;
@@ -118,8 +121,54 @@ void Interface<T>::serviceMenu()
 			break;
 
 		case 11:
-			object.fileService();
-			break;
+		{
+			FileTxt<T> fl_txt(GetFileName<T>());
+			fl_txt.OpenFileOut();
+
+			if (!fl_txt.isOpened())
+			{
+				cout << "File open failed";
+			}
+
+			while (object.empty())
+			{
+				T obj = object.popBegin();
+				fl_txt.WriteToFile(obj);
+			}
+
+			cout << "Write succeed" << endl;
+		}
+
+		break;
+		
+		case 12:
+		{
+			FileTxt<T> fl_txt(GetFileName<T>());
+			fl_txt.OpenFileIn();
+
+			if (!fl_txt.isOpened())
+			{
+				cout << "File open failed";
+			}
+
+			while (true)
+			{
+				T temp;
+				fl_txt.ReadFromFile(temp);
+
+				if (fl_txt.isEnd())
+				{
+					break;
+				}
+
+				object.addToEnd(temp);
+			}
+
+			cout << "Read succeed" << endl;
+		}
+
+		break;
+
 		default:
 			return;
 		}

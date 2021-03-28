@@ -42,3 +42,17 @@ ostream& operator<<(ostream& os, Stationary& obj)
 {
 	return os << dynamic_cast<VMachine&>(obj) << setw(10) << obj.powerSupply;
 }
+
+fstream& operator<<(fstream& out, Stationary& obj)
+{
+	out << dynamic_cast<VMachine&>(obj);
+	out << obj.powerSupply << " ";
+	return out;
+}
+
+fstream& operator>>(fstream& in, Stationary& obj)
+{
+	in >> dynamic_cast<VMachine&>(obj);
+	in >> obj.powerSupply;
+	return in;
+}

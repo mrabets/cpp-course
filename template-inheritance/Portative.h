@@ -13,7 +13,10 @@ public:
 
 	friend istream& operator >> (istream& in, Portative& obj);
 	friend ostream& operator << (ostream& os, Portative& obj);
-protected:
+
+	friend fstream& operator<<(fstream& out, Portative& obj);
+	friend fstream& operator>>(fstream& in, Portative& obj);
+private:
 	int battery;
 };
 

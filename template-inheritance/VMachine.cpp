@@ -41,3 +41,15 @@ ostream& operator<<(ostream& os, VMachine& obj)
 	return os << setw(10) << obj.model;
 }
 
+fstream& operator<<(fstream& out, VMachine& obj)
+{
+	out << obj.model << ';' << " ";
+	return out;
+}
+
+fstream& operator>>(fstream& in, VMachine& obj)
+{
+	getline(in, obj.model, ';');
+	return in;
+}
+

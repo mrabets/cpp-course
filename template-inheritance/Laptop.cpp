@@ -43,12 +43,14 @@ ostream& operator<<(ostream& os, Laptop& obj)
 
 fstream& operator<<(fstream& out, Laptop& obj)
 {
-	out << obj.model << setw(15) << obj.battery << setw(10) << obj.matrix << '\n';
+	out << dynamic_cast<Portative&>(obj);
+	out << obj.matrix << '\n';
 	return out;
 }
 
 fstream& operator>>(fstream& in, Laptop& obj)
 {
-	in >> obj.model >> obj.battery >> obj.matrix;
+	in >> dynamic_cast<Portative&>(obj);
+	getline(in, obj.matrix, '\n');
 	return in;
 }

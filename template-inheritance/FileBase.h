@@ -9,26 +9,18 @@
 using namespace std;
 class FileBase
 {
-public:
-	FileBase(string fileName, long int mode)
-	{ 
-		this->fileName = fileName;
-		this->mode = mode;
-	}
-
 protected:
 	string fileName;
 	fstream fs;
-	long int mode;
 };
 
 template <class T>
 class FileTxt : public FileBase
 {
 public:
-	FileTxt(string name, long int mode) : FileBase(name, mode)
+	FileTxt(string name)
 	{ 
-		OpenFile();
+		this->fileName = name;
 	};
 
 	~FileTxt()
@@ -39,7 +31,9 @@ public:
 	void WriteToFile(T& object);
 	void ReadFromFile(T& object);
 
-	void OpenFile();
+	void OpenFileOut();
+	void OpenFileIn();
+
 	bool isOpened();
 	void CloseFile();
 
@@ -55,13 +49,22 @@ inline void FileTxt<T>::WriteToFile(T& object)
 template<class T>
 inline void FileTxt<T>::ReadFromFile(T& object)
 {
-	fs >> object;
+	if (!isEnd())
+	{
+		fs >> object;
+	}
 }
 
 template<class T>
-inline void FileTxt<T>::OpenFile()
+inline void FileTxt<T>::OpenFileOut()
 {
-	fs.open(fileName, ios::openmode(mode));
+	fs.open(fileName, ios::out | ios::trunc);
+}
+
+template<class T>
+inline void FileTxt<T>::OpenFileIn()
+{
+	fs.open(fileName, ios::in);
 }
 
 template<class T>

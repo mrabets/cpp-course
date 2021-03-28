@@ -32,6 +32,16 @@ public:
 
 string GetCorrectString(istream& in, string whatInput, int maxLength);
 
+template<class T>
+string GetFileName()
+{
+	string fileName = typeid(T).name();
+	fileName.erase(0, 6);
+	fileName.append(".txt");
+
+	return fileName;
+}
+
 template<typename T>
 T GetCorrectNumber(istream& in, string whatInput, const T minNumber, const T maxNumber)
 {

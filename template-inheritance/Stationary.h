@@ -14,6 +14,8 @@ public:
 	friend istream& operator >> (istream& in, Stationary& obj);
 	friend ostream& operator << (ostream& os, Stationary& obj);
 
-protected:
+	friend fstream& operator<<(fstream& out, Stationary& obj);
+	friend fstream& operator>>(fstream& in, Stationary& obj);
+private:
 	double powerSupply;
 };
