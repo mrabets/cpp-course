@@ -43,7 +43,7 @@ ostream& operator<<(ostream& os, Laptop& obj)
 
 fstream& operator<<(fstream& out, Laptop& obj)
 {
-	out << setw(15) << obj.model << setw(15) << obj.battery << setw(10) << obj.matrix << '\n';
+	out << obj.model << setw(15) << obj.battery << setw(10) << obj.matrix << '\n';
 	return out;
 }
 

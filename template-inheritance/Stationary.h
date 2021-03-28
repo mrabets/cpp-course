@@ -1,3 +1,4 @@
+
 #include "VMachine.h"
 class Stationary : public VMachine
 {

@@ -1,7 +1,5 @@
 #pragma once
 
-using namespace std;
-
 template<class T>
 class Ring
 {
@@ -46,6 +44,24 @@ public:
 
 	void fileService();
 };
+
+template<>
+void Ring<Laptop>::fileService()
+{
+	fileServiceBase("Laptop.txt");
+}
+
+template<>
+void Ring<Tablet>::fileService()
+{
+	fileServiceBase("Tablet.txt");
+}
+
+template<>
+void Ring<Monoblock>::fileService()
+{
+	fileServiceBase("Monoblock.txt");
+}
 
 template<class T>
 void Ring<T>::fileServiceBase(string fileName)
@@ -197,24 +213,6 @@ void Ring<T>::fileServiceBase(string fileName)
 		}
 	}
 }
- 
-template<>
-void Ring<Laptop>::fileService()
-{	
-	fileServiceBase("Laptop.txt");
-}
-
-template<>
-void Ring<Tablet>::fileService()
-{
-	fileServiceBase("Tablet.txt");
-}
-
-template<>
-void Ring<Monoblock>::fileService()
-{
-	fileServiceBase("Monoblock.txt");
-}
 
 template<class T>
 int Ring<T>::countOfNodes = 0;
@@ -338,13 +336,14 @@ void Ring<T>::deleteByIndex(int index)
 		previous->next = temp->next;
 		delete temp;
 	}
-
+	
 	size--;
 }
 
 template<class T>
 void Ring<T>::deleteFirst()
 {
+	
 	if (head == nullptr)
 	{
 		cout << "Ring is empty" << endl; return;		

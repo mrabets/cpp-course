@@ -107,3 +107,5 @@ T GetCorrectNumber(istream& in, string whatInput, const T minNumber, const T max
 
 	return number;
 }
+
+void RemoveSpaces(string& str);

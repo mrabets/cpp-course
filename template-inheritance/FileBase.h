@@ -7,16 +7,15 @@
 #include <iomanip>
 
 using namespace std;
-
 class FileBase
 {
 public:
-	FileBase() { }
 	FileBase(string fileName, long int mode)
 	{ 
 		this->fileName = fileName;
 		this->mode = mode;
 	}
+
 protected:
 	string fileName;
 	fstream fs;
@@ -27,7 +26,6 @@ template <class T>
 class FileTxt : public FileBase
 {
 public:
-	FileTxt() { }
 	FileTxt(string name, long int mode) : FileBase(name, mode)
 	{ 
 		OpenFile();
@@ -40,7 +38,7 @@ public:
 
 	void WriteToFile(T& object);
 	void ReadFromFile(T& object);
-	void Remove();
+
 	void OpenFile();
 	bool isOpened();
 	void CloseFile();
@@ -57,10 +55,7 @@ inline void FileTxt<T>::WriteToFile(T& object)
 template<class T>
 inline void FileTxt<T>::ReadFromFile(T& object)
 {
-	if (!isEnd())
-	{
-		fs >> object;
-	}
+	fs >> object;
 }
 
 template<class T>

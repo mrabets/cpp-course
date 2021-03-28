@@ -3,6 +3,7 @@
 #include "Laptop.h"
 #include "Tablet.h"
 #include "Monoblock.h"
+
 #include "Ring.h"
 
 template<class T>
