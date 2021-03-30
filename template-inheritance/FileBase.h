@@ -14,6 +14,8 @@ protected:
 	fstream fs;
 };
 
+
+
 template <class T>
 class FileTxt : public FileBase
 {

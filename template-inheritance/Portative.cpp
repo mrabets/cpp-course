@@ -43,6 +43,7 @@ ostream& operator<<(ostream& os, Portative& obj)
     return os << dynamic_cast<VMachine&>(obj) << setw(10) << obj.battery;
 }
 
+
 fstream& operator<<(fstream& out, Portative& obj)
 {
     out << dynamic_cast<VMachine&>(obj);

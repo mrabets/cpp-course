@@ -133,9 +133,11 @@ void Interface<T>::serviceMenu()
 				break;
 			}
 
+			T obj;
+
 			while (object.empty())
 			{
-				T obj = object.popBegin();
+				obj = object.popBegin();
 				fl_txt.WriteToFile(obj);
 			}
 

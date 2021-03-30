@@ -41,6 +41,7 @@ ostream& operator<<(ostream& os, VMachine& obj)
 	return os << setw(10) << obj.model;
 }
 
+
 fstream& operator<<(fstream& out, VMachine& obj)
 {
 	out << obj.model << ';' << " ";
