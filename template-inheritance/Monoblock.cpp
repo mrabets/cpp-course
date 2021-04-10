@@ -57,3 +57,17 @@ fstream& operator>>(fstream& in, Monoblock& obj)
 	getline(in, obj.standColour, '\n');
 	return in;
 }
+
+ofstream& operator<<(ofstream& out, Monoblock& obj)
+{
+	out << dynamic_cast<Stationary&>(obj);
+	out << obj.standColour << '\n';
+	return out;
+}
+
+ifstream& operator>>(ifstream& in, Monoblock& obj)
+{
+	in >> dynamic_cast<Stationary&>(obj);
+	getline(in, obj.standColour, '\n');
+	return in;
+}

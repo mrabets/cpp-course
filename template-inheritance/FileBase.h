@@ -11,14 +11,16 @@ class FileBase
 {
 protected:
 	string fileName;
+
 	fstream fs;
+	ifstream in;
+	ofstream out;
 };
-
-
 
 template <class T>
 class FileTxt : public FileBase
 {
+
 public:
 	FileTxt(string name)
 	{ 
@@ -27,7 +29,7 @@ public:
 
 	~FileTxt()
 	{
-		CloseFile();
+	CloseFile();
 	}
 
 	void WriteToFile(T& object);
@@ -44,7 +46,7 @@ public:
 
 template<class T>
 inline void FileTxt<T>::WriteToFile(T& object)
-{	
+{
 	fs << object;
 }
 
@@ -90,6 +92,7 @@ inline void FileTxt<T>::CloseFile()
 template <class T>
 class FileBin : public FileBase
 {
+	
 public:
 	FileBin(string name)
 	{
@@ -98,7 +101,14 @@ public:
 
 	~FileBin()
 	{
-		CloseFile();
+		if (isOpenedIn())
+		{
+			CloseFileIn();
+		}
+		else
+		{
+			CloseFileOut();
+		}
 	}
 
 	void WriteToBinFile(T& object);
@@ -107,8 +117,11 @@ public:
 	void OpenBinFileOut();
 	void OpenBinFileIn();
 
-	bool isOpened();
-	void CloseFile();
+	bool isOpenedIn();
+	bool isOpenedOut();
+
+	void CloseFileIn();
+	void CloseFileOut();
 
 	bool isEnd();
 };
@@ -117,42 +130,60 @@ template<class T>
 inline void FileBin<T>::WriteToBinFile(T& object)
 {
 	//fs << object;
-	fs.write(reinterpret_cast<char*>(&object), sizeof(object));
+	//fs.write((char*)&object, sizeof(T));
+	//object.write(fs);
+	out << object;
 }
 
 template<class T>
 inline void FileBin<T>::ReadFromBinFile(T& object)
 {
 	//fs >> object;
-	fs.read(reinterpret_cast<char*>(&object), sizeof(object));
+	//fs.read((char*)& object, sizeof(T));
+	//object.read(fs);
+	in >> object;
 }
 
 template<class T>
 inline void FileBin<T>::OpenBinFileOut()
 {
-	fs.open(fileName, ios::out | ios::binary | ios::trunc);
+	//fs.open(fileName, ios::out | ios::binary | ios::trunc);
+	out.open(fileName, ios::binary);
 }
 
 template<class T>
 inline void FileBin<T>::OpenBinFileIn()
 {
-	fs.open(fileName, ios::in | ios::binary);
+	//fs.open(fileName, ios::in | ios::binary);
+	in.open(fileName, ios::binary);
 }
 
 template<class T>
-inline bool FileBin<T>::isOpened()
+inline bool FileBin<T>::isOpenedIn()
 {
-	return fs.is_open();
+	return in.is_open();
 }
 
 template<class T>
-inline void FileBin<T>::CloseFile()
+inline bool FileBin<T>::isOpenedOut()
 {
-	fs.close();
+	return out.is_open();
+}
+
+template<class T>
+inline void FileBin<T>::CloseFileIn()
+{
+	in.close();
+}
+
+template<class T>
+inline void FileBin<T>::CloseFileOut()
+{
+	out.close();
 }
 
 template<class T>
 inline bool FileBin<T>::isEnd()
 {
-	return fs.eof();
+	return in.eof();
 }

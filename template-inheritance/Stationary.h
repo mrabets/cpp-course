@@ -16,6 +16,9 @@ public:
 
 	friend fstream& operator<<(fstream& out, Stationary& obj);
 	friend fstream& operator>>(fstream& in, Stationary& obj);
+
+	friend ofstream& operator<<(ofstream& out, Stationary& obj);
+	friend ifstream& operator>>(ifstream& in, Stationary& obj);
 private:
 	double powerSupply;
 };

@@ -1,1 +1,3 @@
-Sam Sam; 1800 IPS
+Samsung; 1800 IP PPS
+I B A; 3300 TN FILM
+L G; 4555 AMOLED

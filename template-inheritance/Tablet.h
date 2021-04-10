@@ -16,6 +16,9 @@ public:
 
 	friend fstream& operator<<(fstream& out, Tablet& obj);
 	friend fstream& operator>>(fstream& in, Tablet& obj);
+
+	friend ofstream& operator<<(ofstream& out, Tablet& obj);
+	friend ifstream& operator>>(ifstream& in, Tablet& obj);
 private:
 	bool stylus;
 };

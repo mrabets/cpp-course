@@ -60,3 +60,19 @@ fstream& operator>>(fstream& in, Tablet& obj)
 	in.ignore(10000, '\n');
 	return in;
 }
+
+ofstream& operator<<(ofstream& out, Tablet& obj)
+{
+	out << dynamic_cast<Portative&>(obj);
+	out << obj.stylus << '\n';
+	return out;
+}
+
+ifstream& operator>>(ifstream& in, Tablet& obj)
+{
+	in >> dynamic_cast<Portative&>(obj);
+	in >> obj.stylus;
+	in.clear();
+	in.ignore(10000, '\n');
+	return in;
+}

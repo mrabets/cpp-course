@@ -2,6 +2,8 @@
 
 #include "BaseException.h"
 
+constexpr auto LENGTH = 40;
+
 class VMachine
 {
 public:
@@ -18,6 +20,12 @@ public:
 
 	friend fstream& operator<<(fstream& out, VMachine& obj);
 	friend fstream& operator>>(fstream& in, VMachine& obj);
+
+	friend ofstream& operator<<(ofstream& out, VMachine& obj);
+	friend ifstream& operator>>(ifstream& in, VMachine& obj);
+
+	virtual void write(std::ostream& f);
+	virtual void read(std::istream& f);
 private:
 	string model;
 };

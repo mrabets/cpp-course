@@ -56,3 +56,17 @@ fstream& operator>>(fstream& in, Stationary& obj)
 	in >> obj.powerSupply;
 	return in;
 }
+
+ofstream& operator<<(ofstream& out, Stationary& obj)
+{
+	out << dynamic_cast<VMachine&>(obj);
+	out << obj.powerSupply << " ";
+	return out;
+}
+
+ifstream& operator>>(ifstream& in, Stationary& obj)
+{
+	in >> dynamic_cast<VMachine&>(obj);
+	in >> obj.powerSupply;
+	return in;
+}

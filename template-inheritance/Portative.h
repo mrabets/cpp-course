@@ -16,6 +16,12 @@ public:
 
 	friend fstream& operator<<(fstream& out, Portative& obj);
 	friend fstream& operator>>(fstream& in, Portative& obj);
+
+	friend ofstream& operator<<(ofstream& out, Portative& obj);
+	friend ifstream& operator>>(ifstream& in, Portative& obj);
+
+	void write(std::ostream& f) override;
+	void read(std::istream& f) override;
 private:
 	int battery;
 };

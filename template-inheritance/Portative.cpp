@@ -29,6 +29,18 @@ void Portative::setBattery(int battery)
     this->battery = battery;
 }
 
+void Portative::write(std::ostream& f)
+{
+    VMachine::write(f);
+    f.write((char*)&battery, sizeof(battery));
+}
+
+void Portative::read(std::istream& f)
+{
+    VMachine::read(f);
+    f.read((char*)&battery, sizeof(battery));
+}
+
 istream& operator>>(istream& in, Portative& obj)
 {
     in >> dynamic_cast<VMachine&>(obj);
@@ -55,6 +67,22 @@ fstream& operator>>(fstream& in, Portative& obj)
 {
     in >> dynamic_cast<VMachine&>(obj);
     in >> obj.battery;
+    return in;
+}
+
+ofstream& operator<<(ofstream& out, Portative& obj)
+{
+    out << dynamic_cast<VMachine&>(obj);
+    out.write(reinterpret_cast<char*>(&obj.battery), sizeof(obj.battery));
+    return out;
+}
+
+ifstream& operator>>(ifstream& in, Portative& obj)
+{
+    in >> dynamic_cast<VMachine&>(obj);
+
+    in.read(reinterpret_cast<char*>(&obj.battery), sizeof(obj.battery));
+
     return in;
 }
 

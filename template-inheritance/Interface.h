@@ -6,8 +6,6 @@
 
 #include "Ring.h"
 
-
-
 template<class T>
 class Interface
 {
@@ -21,6 +19,7 @@ public:
 template <class T>
 void Interface<T>::serviceMenu()
 {
+
 	Ring<T> object;
 
 	while (true)
@@ -180,20 +179,19 @@ void Interface<T>::serviceMenu()
 			FileBin<T> fl_bin(GetFileName<T>(true));
 			fl_bin.OpenBinFileOut();
 
-			if (!fl_bin.isOpened())
+			if (!fl_bin.isOpenedOut())
 			{
 				cout << "File open failed";
 				break;
 			}
 
-			T obj = object.popBegin();
-			fl_bin.WriteToBinFile(obj);
+			T obj;
 
-			/*while (object.empty())
+			while (object.empty())
 			{
 				T obj = object.popBegin();
 				fl_bin.WriteToBinFile(obj);
-			}*/
+			}
 
 			cout << "Write succeed" << endl;
 		}
@@ -205,19 +203,20 @@ void Interface<T>::serviceMenu()
 			FileBin<T> fl_bin(GetFileName<T>(true));
 			fl_bin.OpenBinFileIn();
 
-			if (!fl_bin.isOpened())
+			if (!fl_bin.isOpenedIn())
 			{
 				cout << "File open failed";
 				break;
 			}
 
-			T temp;
+			/*T temp;
 			fl_bin.ReadFromBinFile(temp);
-			object.addToEnd(temp);
+			object.addToEnd(temp);*/
 
-			/*while (true)
+			T temp;
+
+			while (true)
 			{
-				T temp;
 				fl_bin.ReadFromBinFile(temp);
 
 				if (fl_bin.isEnd())
@@ -226,7 +225,7 @@ void Interface<T>::serviceMenu()
 				}
 
 				object.addToEnd(temp);
-			}*/
+			}
 
 			cout << "Read succeed" << endl;
 		}

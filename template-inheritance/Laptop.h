@@ -17,6 +17,12 @@ public:
 
 	friend fstream& operator<<(fstream& out, Laptop& obj);
 	friend fstream& operator>>(fstream& in, Laptop& obj);
+
+	friend ofstream& operator<<(ofstream& out, Laptop& obj);
+	friend ifstream& operator>>(ifstream& in, Laptop& obj);
+
+	void write(std::ostream& f) override;
+	void read(std::istream& f) override;
 private:
 	string matrix;
 };
