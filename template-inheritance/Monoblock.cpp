@@ -61,13 +61,23 @@ fstream& operator>>(fstream& in, Monoblock& obj)
 ofstream& operator<<(ofstream& out, Monoblock& obj)
 {
 	out << dynamic_cast<Stationary&>(obj);
-	out << obj.standColour << '\n';
+
+	char buffer[LENGTH];
+
+	strcpy_s(buffer, obj.standColour.length() + 1, obj.standColour.c_str());
+	out.write(reinterpret_cast<char*>(&buffer), sizeof(buffer));
 	return out;
 }
 
 ifstream& operator>>(ifstream& in, Monoblock& obj)
 {
 	in >> dynamic_cast<Stationary&>(obj);
-	getline(in, obj.standColour, '\n');
+
+	char buffer[LENGTH];
+
+	in.read(reinterpret_cast<char*>(&buffer), sizeof(buffer));
+	string temp = string(buffer);
+	obj.standColour = temp;
+
 	return in;
 }

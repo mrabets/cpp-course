@@ -23,9 +23,62 @@ private:
 
 	static int countOfNodes;
 	void displayBase();
-	//void fileServiceBase(string fileName);
 
 public:
+	class Iterator {
+	public:
+		using iterator_category = std::forward_iterator_tag;
+		using difference_type = std::ptrdiff_t;
+
+		Iterator(Node<T>* ptr) : m_node(ptr) { }
+
+		friend bool operator== (const Iterator& a, const Iterator& b)
+		{
+			return a.m_node == b.m_node;
+		};
+
+		friend bool operator!= (const Iterator& a, const Iterator& b) 
+		{
+			return a.m_node != b.m_node;
+		};
+
+		T& operator*() const 
+		{
+			return m_node->data;
+		}
+
+		T* operator->()
+		{
+			return m_node->data;
+		}
+
+		Iterator& operator++()
+		{
+			m_node = m_node->next;
+			return *this;
+		}
+
+		Iterator operator++(int)
+		{
+			Iterator tmp = *this;
+			++(*this);
+			return tmp;
+		}
+
+	private:
+		Node<T>* m_node;
+	};
+
+	Iterator begin()
+	{ 
+		return Iterator(head);
+	}
+
+	Iterator end() 
+	{ 
+		return Iterator(nullptr);
+	}
+
 	Ring();
 	~Ring();
 
@@ -44,8 +97,6 @@ public:
 
 	int empty();
 	T popBegin();
-
-	//void fileService();
 };
 
 template<class T>
@@ -82,175 +133,6 @@ inline T Ring<T>::popBegin()
 	deleteFirst();
 	return temp.data;
 }
-
-//template<>
-//void Ring<Laptop>::fileService()
-//{
-//	fileServiceBase("Laptop.txt");
-//}
-//
-//template<>
-//void Ring<Tablet>::fileService()
-//{
-//	fileServiceBase("Tablet.txt");
-//}
-//
-//template<>
-//void Ring<Monoblock>::fileService()
-//{
-//	fileServiceBase("Monoblock.txt");
-//}
-//
-//template<class T>
-//void Ring<T>::fileServiceBase(string fileName)
-//{
-//	fstream fs;
-//
-//	while (true)
-//	{
-//		cout << "Choose operation for work with file system: " << endl << endl
-//			<< "1. Write data" << endl
-//			<< "2. Overwrite data" << endl
-//			<< "3. Read data" << endl
-//			<< "4. Print data to screen" << endl
-//			<< "5. Delete data" << endl << endl
-//			<< "0. Back" << endl;
-//
-//		int choice;
-//		cin >> choice;
-//
-//		system("CLS");
-//
-//		switch (choice)
-//		{
-//		case 1:
-//		{
-//			FileTxt<T> fileObject(fileName, ios::out | ios::app);
-//
-//			if (!fileObject.isOpened())
-//			{
-//				cout << "File open error" << endl << endl;
-//			}
-//			else
-//			{
-//				if (head == nullptr)
-//				{
-//					cout << "The table is empty" << endl;
-//					break;
-//				}
-//
-//				Node<T>* current = head;
-//				while (current->next != head)
-//				{
-//					fileObject.WriteToFile(current->data);
-//					current = current->next;
-//				}
-//
-//				fileObject.WriteToFile(current->data);
-//
-//				cout << "Writed succeed" << endl << endl;
-//			}
-//
-//			break;
-//		}
-//		case 2:
-//		{
-//			FileTxt<T> fileObject(fileName, ios::out | ios::trunc);
-//
-//			if (!fileObject.isOpened())
-//			{
-//				cout << "File open error" << endl << endl;
-//			}
-//			else
-//			{
-//				if (head == nullptr)
-//				{
-//					cout << "The table is empty" << endl;
-//					break;
-//				}
-//
-//				Node<T>* current = head;
-//				while (current->next != head)
-//				{
-//					fileObject.WriteToFile(current->data);
-//					current = current->next;
-//				}
-//
-//				fileObject.WriteToFile(current->data);
-//
-//				cout << "Overwrited succeed" << endl << endl;
-//			}
-//
-//			break;
-//		}
-//
-//		case 3:
-//		{
-//			FileTxt<T> fileObject(fileName, ios::in);
-//
-//			if (!fileObject.isOpened())
-//			{
-//				cout << "File open error" << endl;
-//			}
-//			else
-//			{
-//				while (true)
-//				{
-//					T object;
-//					fileObject.ReadFromFile(object);
-//
-//					if (fileObject.isEnd())
-//					{
-//						break;
-//					}
-//
-//					addToEnd(object);
-//				}
-//
-//				cout << "Read succeed" << endl << endl;
-//			}
-//
-//			break;
-//		}
-//
-//		case 4:
-//		{
-//			FileTxt<T> fileObject(fileName, ios::in);
-//
-//			if (!fileObject.isOpened())
-//			{
-//				cout << "File open error" << endl;
-//			}
-//			else
-//			{
-//				while (true)
-//				{
-//					T object;
-//					fileObject.ReadFromFile(object);
-//
-//					if (fileObject.isEnd())
-//					{
-//						break;
-//					}
-//
-//					cout << object;
-//				}
-//			}
-//
-//			break;
-//		}
-//
-//		case 5:
-//		{
-//			FileTxt<T> fileObject(fileName, ios::out | ios::trunc);
-//			break;
-//		}
-//
-//		default:
-//			return;
-//		}
-//	}
-//}
 
 template<class T>
 int Ring<T>::countOfNodes = 0;
@@ -466,21 +348,19 @@ template<>
 void Ring<Laptop>::display()
 {
 	cout << setw(10) << "MODEL" << setw(10) << "BATTERY" << setw(10) << "MATRIX" << endl;
-	displayBase();
 }
 
 template<>
 void Ring<Tablet>::display()
 {
 	cout << setw(10) << "MODEL" << setw(10) << "BATTERY" << setw(10) << "STYLUS" << endl;
-	displayBase();
 }
 
 template<>
 void Ring<Monoblock>::display()
 {
 	cout << setw(10) << "MODEL" << setw(10) << "POWER" << setw(10) << "COLOUR" << endl;
-	displayBase();
+
 }
 
 template <class T>

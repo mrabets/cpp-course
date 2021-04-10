@@ -60,13 +60,13 @@ fstream& operator>>(fstream& in, Stationary& obj)
 ofstream& operator<<(ofstream& out, Stationary& obj)
 {
 	out << dynamic_cast<VMachine&>(obj);
-	out << obj.powerSupply << " ";
+	out.write(reinterpret_cast<char*>(&obj.powerSupply), sizeof(obj.powerSupply));
 	return out;
 }
 
 ifstream& operator>>(ifstream& in, Stationary& obj)
 {
 	in >> dynamic_cast<VMachine&>(obj);
-	in >> obj.powerSupply;
+	in.read(reinterpret_cast<char*>(&obj.powerSupply), sizeof(obj.powerSupply));
 	return in;
 }

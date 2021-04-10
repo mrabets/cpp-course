@@ -64,15 +64,13 @@ fstream& operator>>(fstream& in, Tablet& obj)
 ofstream& operator<<(ofstream& out, Tablet& obj)
 {
 	out << dynamic_cast<Portative&>(obj);
-	out << obj.stylus << '\n';
+	out.write(reinterpret_cast<char*>(&obj.stylus), sizeof(obj.stylus));
 	return out;
 }
 
 ifstream& operator>>(ifstream& in, Tablet& obj)
 {
 	in >> dynamic_cast<Portative&>(obj);
-	in >> obj.stylus;
-	in.clear();
-	in.ignore(10000, '\n');
+	in.read(reinterpret_cast<char*>(&obj.stylus), sizeof(obj.stylus));
 	return in;
 }

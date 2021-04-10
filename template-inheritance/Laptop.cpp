@@ -83,10 +83,10 @@ ofstream& operator<<(ofstream& out, Laptop& obj)
 {
 	out << dynamic_cast<Portative&>(obj);
 
-	char buf[LENGTH];
+	char buffer[LENGTH];
 
-	strcpy_s(buf, obj.matrix.length() + 1, obj.matrix.c_str());
-	out.write(reinterpret_cast<char*>(&buf), sizeof(buf));
+	strcpy_s(buffer, obj.matrix.length() + 1, obj.matrix.c_str());
+	out.write(reinterpret_cast<char*>(&buffer), sizeof(buffer));
 
 	return out;
 }
@@ -95,11 +95,11 @@ ifstream& operator>>(ifstream& in, Laptop& obj)
 {
 	in >> dynamic_cast<Portative&>(obj);
 	
-	char buf[LENGTH];
+	char buffer[LENGTH];
 
-	in.read(reinterpret_cast<char*>(&buf), sizeof(buf));
-	string ss = string(buf);
-	obj.matrix = ss;
+	in.read(reinterpret_cast<char*>(&buffer), sizeof(buffer));
+	string temp = string(buffer);
+	obj.matrix = temp;
 
 	return in;
 }

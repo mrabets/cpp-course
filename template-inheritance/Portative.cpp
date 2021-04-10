@@ -80,9 +80,7 @@ ofstream& operator<<(ofstream& out, Portative& obj)
 ifstream& operator>>(ifstream& in, Portative& obj)
 {
     in >> dynamic_cast<VMachine&>(obj);
-
     in.read(reinterpret_cast<char*>(&obj.battery), sizeof(obj.battery));
-
     return in;
 }
 

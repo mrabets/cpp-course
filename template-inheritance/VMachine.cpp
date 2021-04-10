@@ -76,27 +76,21 @@ fstream& operator>>(fstream& in, VMachine& obj)
 
 ofstream& operator<<(ofstream& out, VMachine& obj)
 {
-	/*out << obj.model << ';' << " ";
-	return out;*/
+	char buffer[LENGTH];
 
-	char buf[LENGTH];
-
-	strcpy_s(buf, obj.model.length() + 1, obj.model.c_str());
-	out.write(reinterpret_cast<char*>(&buf), sizeof(buf));
+	strcpy_s(buffer, obj.model.length() + 1, obj.model.c_str());
+	out.write(reinterpret_cast<char*>(&buffer), sizeof(buffer));
 
 	return out;
 }
 
 ifstream& operator>>(ifstream& in, VMachine& obj)
 {
-	/*getline(in, obj.model, ';');
-	return in;*/
+	char buffer[LENGTH];
 
-	char buf[LENGTH];
-
-	in.read(reinterpret_cast<char*>(&buf), sizeof(buf));
-	string ss = string(buf);
-	obj.model = ss;
+	in.read(reinterpret_cast<char*>(&buffer), sizeof(buffer));
+	string temp = string(buffer);
+	obj.model = temp;
 
 	return in;
 }

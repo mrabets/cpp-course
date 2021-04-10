@@ -1,2 +1,4 @@
-I B A; 1800 1
-Honor; 3300 0
+Google Nexus; 6500 0
+Yoto Phone; 7777 1
+ASUS; 4444 0
+Huawei Co; 1888 1

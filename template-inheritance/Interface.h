@@ -114,8 +114,23 @@ void Interface<T>::serviceMenu()
 			break;
 
 		case 9:
+		{
 			object.display();
-			break;
+
+			typename Ring<T>::Iterator iter = object.begin();
+
+			if (iter == nullptr)
+			{
+				cout << "Ring is empty" << endl;
+			}
+
+			do
+			{
+				cout << *iter++;
+			} 
+			while (iter != object.begin());	
+		}		
+		break;
 
 		case 10:
 			cout << "Count of nodes: " << object.getCountOfNodes() << endl;
@@ -156,9 +171,10 @@ void Interface<T>::serviceMenu()
 				break;
 			}
 
+			T temp;
+
 			while (true)
 			{
-				T temp;
 				fl_txt.ReadFromFile(temp);
 
 				if (fl_txt.isEnd())
@@ -189,7 +205,7 @@ void Interface<T>::serviceMenu()
 
 			while (object.empty())
 			{
-				T obj = object.popBegin();
+				obj = object.popBegin();
 				fl_bin.WriteToBinFile(obj);
 			}
 
@@ -208,10 +224,6 @@ void Interface<T>::serviceMenu()
 				cout << "File open failed";
 				break;
 			}
-
-			/*T temp;
-			fl_bin.ReadFromBinFile(temp);
-			object.addToEnd(temp);*/
 
 			T temp;
 
