@@ -41,9 +41,9 @@ string GetCorrectString(istream& in, string whatInput, int maxLength)
 			cout << obj.GetExceptionMessage() << " Error code: " << obj.GetErrorCode() << endl;
 			flag = 1;
 		}
-		catch (...)
+		catch (exception ex)
 		{
-			cout << "Error in block catch (...)." << endl;
+			cout << ex.what() << endl;
 			flag = 1;
 		}
 	} while (flag);

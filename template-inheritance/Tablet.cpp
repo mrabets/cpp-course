@@ -29,6 +29,18 @@ void Tablet::setStylus(bool stylus)
 	this->stylus = stylus;
 }
 
+bool operator<(const Tablet& first, const Tablet& second)
+{
+	return first.model < second.model;
+}
+
+bool operator==(const Tablet& first, const Tablet& second)
+{
+	return first.model == second.model
+		&& first.stylus == second.stylus
+		&& first.battery == second.battery;
+}
+
 istream& operator>>(istream& in, Tablet& obj)
 {
 	in >> dynamic_cast<Portative&>(obj);
@@ -39,10 +51,10 @@ istream& operator>>(istream& in, Tablet& obj)
 	return in;
 }
 
-ostream& operator<<(ostream& os, Tablet& obj)
+ostream& operator<<(ostream& os, const Tablet& obj)
 {
 	cout << boolalpha;
-	return os << dynamic_cast<Portative&>(obj) << setw(10) << obj.stylus << endl;
+	return os << dynamic_cast<const Portative&>(obj) << setw(10) << obj.stylus << endl;
 }
 
 fstream& operator<<(fstream& out, Tablet& obj)

@@ -17,7 +17,6 @@ VMachine::VMachine(const VMachine& object)
 
 VMachine::~VMachine()
 {
-
 }
 
 string VMachine::getModel() const
@@ -56,7 +55,7 @@ istream& operator>>(istream& in, VMachine& obj)
 	return in;
 }
 
-ostream& operator<<(ostream& os, VMachine& obj)
+ostream& operator<<(ostream& os, const VMachine& obj)
 {
 	return os << setw(10) << obj.model;
 }

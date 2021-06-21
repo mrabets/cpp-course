@@ -1,3 +1,11 @@
-Samsung; 1800 IP PPS
-I B A; 3300 TN FILM
-L G; 4555 AMOLED
+Apple; 5000  IPS
+Apple; 4500  TNFILM
+Apple; 4500  TNFILM
+Apple; 4600 IPPS
+Dell; 4000  Amoled
+Dell; 4000  Amoled
+Dell; 3500  IPS
+Samsung; 3300  IPPS
+Samsung; 3200  Amoled
+ZTE; 4200  TNFILM
+ZTE; 3900  Amoled

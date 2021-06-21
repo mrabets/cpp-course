@@ -12,7 +12,7 @@ public:
 	void setBattery(int battery);
 
 	friend istream& operator >> (istream& in, Portative& obj);
-	friend ostream& operator << (ostream& os, Portative& obj);
+	friend ostream& operator << (ostream& os, const Portative& obj);
 
 	friend fstream& operator<<(fstream& out, Portative& obj);
 	friend fstream& operator>>(fstream& in, Portative& obj);
@@ -22,7 +22,7 @@ public:
 
 	void write(std::ostream& f) override;
 	void read(std::istream& f) override;
-private:
+protected:
 	int battery;
 };
 

@@ -1,72 +1,68 @@
 #pragma once
 
 template<class T>
+class Node
+{
+public:
+	Node<T>* next;
+	T data;
+
+	Node(T data = T(), Node* next = nullptr)
+	{
+		this->data = data;
+		this->next = next;
+	}
+};
+
+template<class T>
 class Ring
 {
 private:
-	template<class T>
-	class Node
-	{
-	public:
-		Node* next;
-		T data;
-
-		Node(T data = T(), Node* next = nullptr)
-		{
-			this->data = data;
-			this->next = next;
-			countOfNodes++;
-		}
-	};
 	int size;
 	Node<T>* head;
-
-	static int countOfNodes;
 	void displayBase();
 
 public:
-	class Iterator {
+	class Iterator
+	{
+	private:
+		Node<T>* currentNode;
+
 	public:
-		using iterator_category = std::forward_iterator_tag;
-		using difference_type = std::ptrdiff_t;
-
-		Iterator(Node<T>* ptr) : m_node(ptr) { }
-
-		friend bool operator== (const Iterator& a, const Iterator& b)
-		{
-			return a.m_node == b.m_node;
-		};
-
-		friend bool operator!= (const Iterator& a, const Iterator& b) 
-		{
-			return a.m_node != b.m_node;
-		};
+		Iterator(Node<T>* ptr) : currentNode(ptr) { }
 
 		T& operator*() const 
 		{
-			return m_node->data;
+			return currentNode->data;
 		}
 
 		T* operator->()
 		{
-			return m_node->data;
+			return currentNode->data;
 		}
 
 		Iterator& operator++()
 		{
-			m_node = m_node->next;
+			currentNode = currentNode->next;
 			return *this;
 		}
 
 		Iterator operator++(int)
 		{
-			Iterator tmp = *this;
+			Iterator temp = *this;
 			++(*this);
-			return tmp;
+			return temp;
 		}
 
-	private:
-		Node<T>* m_node;
+		friend bool operator== (const Iterator& first, const Iterator& second)
+		{
+			return first.currentNode == second.currentNode;
+		};
+
+		friend bool operator!= (const Iterator& first, const Iterator& second)
+		{
+			return first.currentNode != second.currentNode;
+		};
 	};
 
 	Iterator begin()
@@ -74,10 +70,10 @@ public:
 		return Iterator(head);
 	}
 
-	Iterator end() 
+	/*Iterator end() 
 	{ 
 		return Iterator(nullptr);
-	}
+	}*/
 
 	Ring();
 	~Ring();
@@ -93,7 +89,6 @@ public:
 	void clear();
 	void changeData(int index);
 	void display();
-	static int getCountOfNodes();
 
 	int empty();
 	T popBegin();
@@ -133,9 +128,6 @@ inline T Ring<T>::popBegin()
 	deleteFirst();
 	return temp.data;
 }
-
-template<class T>
-int Ring<T>::countOfNodes = 0;
 
 template<class T>
 Ring<T>::Ring()
@@ -336,12 +328,6 @@ template<class T>
 void Ring<T>::display()
 {
 	displayBase();
-}
-
-template<class T>
-int Ring<T>::getCountOfNodes()
-{
-	return countOfNodes;
 }
 
 template<>
@@ -557,3 +543,4 @@ int Ring<T>::getSize()
 {
 	return size;
 }
+

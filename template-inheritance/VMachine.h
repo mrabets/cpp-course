@@ -16,7 +16,7 @@ public:
 	void setModel(string model);
 
 	friend istream& operator >> (istream& in, VMachine& obj);
-	friend ostream& operator << (ostream& os, VMachine& obj);
+	friend ostream& operator << (ostream& os, const VMachine& obj);
 
 	friend fstream& operator<<(fstream& out, VMachine& obj);
 	friend fstream& operator>>(fstream& in, VMachine& obj);
@@ -26,6 +26,6 @@ public:
 
 	virtual void write(std::ostream& f);
 	virtual void read(std::istream& f);
-private:
+protected:
 	string model;
 };

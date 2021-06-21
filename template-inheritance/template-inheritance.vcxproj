@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithm.h" />
     <ClInclude Include="BaseException.h" />
     <ClInclude Include="FileBase.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Laptop.h" />
     <ClInclude Include="Monoblock.h" />
+    <ClInclude Include="MultisetFunc.h" />
     <ClInclude Include="Portative.h" />
     <ClInclude Include="Ring.h" />
     <ClInclude Include="Stationary.h" />

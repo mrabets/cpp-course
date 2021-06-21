@@ -38,9 +38,9 @@ istream& operator>>(istream& in, Stationary& obj)
 	return in;
 }
 
-ostream& operator<<(ostream& os, Stationary& obj)
+ostream& operator<<(ostream& os, const Stationary& obj)
 {
-	return os << dynamic_cast<VMachine&>(obj) << setw(10) << obj.powerSupply;
+	return os << dynamic_cast<const VMachine&>(obj) << setw(10) << obj.powerSupply;
 }
 
 fstream& operator<<(fstream& out, Stationary& obj)

@@ -30,6 +30,18 @@ void Monoblock::setStandColour(string standColour)
 	this->standColour = standColour;
 }
 
+bool operator<(const Monoblock& first, const Monoblock& second)
+{
+	return first.model < second.model;
+}
+
+bool operator==(const Monoblock& first, const Monoblock& second)
+{
+	return first.model == second.model
+		&& first.powerSupply == second.powerSupply
+		&& first.standColour == second.standColour;
+}
+
 istream& operator>>(istream& in, Monoblock& obj)
 {
 	in >> dynamic_cast<Stationary&>(obj);
@@ -39,9 +51,9 @@ istream& operator>>(istream& in, Monoblock& obj)
 	return in;
 }
 
-ostream& operator<<(ostream& os, Monoblock& obj)
+ostream& operator<<(ostream& os, const Monoblock& obj)
 {
-	return os << dynamic_cast<Stationary&>(obj) << setw(10) << obj.standColour << endl;
+	return os << dynamic_cast<const Stationary&>(obj) << setw(10) << obj.standColour << endl;
 }
 
 fstream& operator<<(fstream& out, Monoblock& obj)

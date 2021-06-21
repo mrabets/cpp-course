@@ -52,6 +52,29 @@ void Laptop::read(std::istream& f)
 	delete data;
 }
 
+
+
+bool operator<(const Laptop& first, const Laptop& second)
+{
+	if (first.model == second.model)
+	{
+		if (first.battery == second.battery)
+		{
+			return first.matrix < second.matrix;
+		}
+
+		return first.battery < second.battery;
+	}
+	return first.model < second.model;
+}
+
+bool operator==(const Laptop& first, const Laptop& second)
+{
+	return first.model == second.model &&
+		   first.battery == second.battery &&
+		   first.matrix == second.matrix;
+}
+
 istream& operator>>(istream& in, Laptop& obj)
 {	
 	in >> dynamic_cast<Portative&>(obj);
@@ -59,9 +82,9 @@ istream& operator>>(istream& in, Laptop& obj)
 	return in;
 }
 
-ostream& operator<<(ostream& os, Laptop& obj)
+ostream& operator<<(ostream& os, const Laptop& obj)
 {
-	return os << dynamic_cast<Portative&>(obj) << setw(10) << obj.matrix << endl;
+	return os << dynamic_cast<const Portative&>(obj) << setw(10) << obj.matrix << endl;
 }
 
 

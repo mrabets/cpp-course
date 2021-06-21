@@ -11,8 +11,11 @@ public:
 	bool isStylus() const;
 	void setStylus(bool stylus);
 
+	friend bool operator<(const Tablet& first, const Tablet& second);
+	friend bool operator==(const Tablet& first, const Tablet& second);
+
 	friend istream& operator >> (istream& in, Tablet& obj);
-	friend ostream& operator << (ostream& os, Tablet& obj);
+	friend ostream& operator << (ostream& os, const Tablet& obj);
 
 	friend fstream& operator<<(fstream& out, Tablet& obj);
 	friend fstream& operator>>(fstream& in, Tablet& obj);

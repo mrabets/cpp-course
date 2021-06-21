@@ -12,8 +12,11 @@ public:
 	string getMatrix() const;
 	void setMatrix(string matrix);
 
-	friend istream& operator >> (istream& in, Laptop& obj);
-	friend ostream& operator << (ostream& os, Laptop& obj);
+	friend bool operator<(const Laptop& first, const Laptop& second);
+	friend bool operator==(const Laptop& first, const Laptop& second);
+
+	friend istream& operator>>(istream& in, Laptop& obj);
+	friend ostream& operator<<(ostream& os, const Laptop& obj);
 
 	friend fstream& operator<<(fstream& out, Laptop& obj);
 	friend fstream& operator>>(fstream& in, Laptop& obj);

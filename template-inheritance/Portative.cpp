@@ -50,9 +50,9 @@ istream& operator>>(istream& in, Portative& obj)
     return in;
 }
 
-ostream& operator<<(ostream& os, Portative& obj)
+ostream& operator<<(ostream& os, const Portative& obj)
 {
-    return os << dynamic_cast<VMachine&>(obj) << setw(10) << obj.battery;
+    return os << dynamic_cast<const VMachine&>(obj) << setw(10) << obj.battery;
 }
 
 
